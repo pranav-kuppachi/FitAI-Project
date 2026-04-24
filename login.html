@@ -5,41 +5,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitAI</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #07090E;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            margin-bottom: 32px;
+        }
+
+        .first-p {
+            font-size: 12px;
+            font-weight: 800;
+            color: #6B7280;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .second-p {
+            font-size: 14px;
+            color: #9CA3AF;
+            line-height: 1.5;
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 10px;
+            font-weight: 800;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .text {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            padding: 12px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .text:focus {
+            border-color: #22D3EE;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
+        }
+
+        .selection-group {
+            margin-top: 24px;
+        }
+
+        .section-title {
+            font-size: 10px;
+            font-weight: 800;
+            color: #6B7280;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .options-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            transition: all 0.2s ease;
+        }
+
+        .option-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .option-card:has(input:checked) {
+            background: rgba(34, 211, 238, 0.1);
+            border-color: #22D3EE;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
+        }
+
+        .radio {
+            display: none;
+        }
+
+        .submit {
+            width: 100%;
+            margin-top: 32px;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(90deg, #22D3EE, #3B82F6);
+            color: #07090E;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(34, 211, 238, 0.3);
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: #22D3EE;
+            filter: blur(150px);
+            opacity: 0.15;
+            top: 10%;
+            left: 10%;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: #3B82F6;
+            filter: blur(150px);
+            opacity: 0.15;
+            bottom: 10%;
+            right: 10%;
+            z-index: -1;
+        }
+        
     </style>
 </head>
 <body>
+
     <div class="card">
-        <div class = "header">
-            <p>Fit<span>AI</span> • STEP 1 OF 1</p>
-            <h1>Tell us about yourself</h1>
-            <p>We'll use this to build a personalized fitness plan for you.</p>
+        <div class="header">
+            <p class="first-p">Fit<span style="color:#22D3EE">AI</span> • STEP 1 of 1</p>
+            <h1 class="subtitle">Tell us about yourself</h1>
+            <p class="second-p">We'll use this to build a personalized fitness plan for you.</p>
         </div>
 
         <form>
-
-            <div class = "row">
+            <div class="row">
                 <div class="input-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Your name">
+                    <input class="text" type="text" id="name" placeholder="Your name">
                 </div>
 
                 <div class="input-group">
                     <label for="age">Age</label>
-                    <input type="text" id="age" placeholder="e.g. 19">
+                    <input class="text" type="text" id="age" placeholder="e.g. 19">
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-group">
                     <label for="weight">Weight</label>
-                    <input type="text" id="weight" placeholder="70">
+                    <input class="text" type="text" id="weight" placeholder="70">
                 </div>
 
                 <div class="input-group">
                     <label for="height">Height</label>
-                    <input type="text" id="height" placeholder="170">
+                    <input class="text" type="text" id="height" placeholder="170">
                 </div>
             </div>
 
@@ -47,17 +237,17 @@
                 <p class="section-title">Activity Level</p>
                 <div class="options-grid">
                     <label class="option-card">
-                        <input type="radio" name="activity" value="light">
+                        <input class="radio" type="radio" name="activity" value="light">
                         <span>Light</span>
                     </label>
 
                     <label class="option-card">
-                        <input type="radio" name="activity" value="moderate">
+                        <input class="radio" type="radio" name="activity" value="moderate">
                         <span>Moderate</span>
                     </label>
 
                     <label class="option-card">
-                        <input type="radio" name="activity" value="active">
+                        <input class="radio" type="radio" name="activity" value="active">
                         <span>Active</span>
                     </label>
                 </div>
@@ -67,30 +257,30 @@
                 <p class="section-title">Primary Goal</p>
                 <div class="options-grid-2">
                     <label class="option-card">
-                        <input type="radio" name="goal" value="lose_weight">
+                        <input class="radio" type="radio" name="goal" value="lose_weight">
                         <span>🔥 Lose Weight</span>
                     </label>
 
                     <label class="option-card">
-                        <input type="radio" name="goal" value="build_muscle">
+                        <input class="radio" type="radio" name="goal" value="build_muscle">
                         <span>💪 Build Muscle</span>
                     </label>
 
                     <label class="option-card">
-                        <input type="radio" name="goal" value="feel_better">
+                        <input class="radio" type="radio" name="goal" value="feel_better">
                         <span>🧘 Feel Better</span>
                     </label>
 
                     <label class="option-card">
-                        <input type="radio" name="goal" value="performance">
+                        <input class="radio" type="radio" name="goal" value="performance">
                         <span>🏅 Performance</span>
                     </label>
                 </div>
             </div>
 
-            <button type="submit">Generate My Plan →</button>
-
+            <button class="submit" type="submit">Generate My Plan →</button>
         </form>
     </div>
+
 </body>
 </html>
