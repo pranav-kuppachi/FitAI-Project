@@ -208,7 +208,7 @@
             <p class="second-p">We'll use this to build a personalized fitness plan for you.</p>
         </div>
 
-        <form>
+        <form id = "form">
             <div class="row">
                 <div class="input-group">
                     <label for="name">Name</label>
@@ -280,6 +280,42 @@
             <button class="submit" type="submit">Generate My Plan →</button>
         </form>
     </div>
+
+    <script>
+        const onboardingForm = document.getElementById("form");
+
+        onboardingForm.addEventListener('submit', function(e){
+            e.preventDefault();
+
+            const userData = {
+                name: document.getElementById('name').value,
+                age: document.getElementById('age').value,
+                weight: document.getElementById('weight').value,
+                height: document.getElementById('height').value,
+
+                activity: document.querySelector('input[name="activity"]:checked')?.value,
+                goal: document.querySelector('input[name="goal"]:checked')?.value,
+                createdAt: new Date().toLocaleDateString()
+            };
+
+            if(!userData.name || !userData.activity || !userData.goal){
+                alert("Please fill in your name and select your activity and goals!");
+                return;
+            }
+
+            localStorage.setItem('FitAI_user',JSON.stringify(userData));
+
+            console.log("Plan data saved successfully:", userData);
+            const btn = document.querySelector('.submit');
+            btn.textContent = "Generating Your Plan...";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert("Profile Created! Time to see your dashboard.");
+            }, 1000);
+        });
+    </script>
 
 </body>
 </html>
