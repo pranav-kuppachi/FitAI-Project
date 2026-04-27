@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="pill-nav" id="pillNav">
+        <div class="logo">Fit<span>AI</span></div>
+        <div class="container">
+            <a class="link" href="dashboard.html" data-page="dashboard">Dashboard</a>
+            <a class="link" href="workouts.html"  data-page="workouts">Workouts</a>
+            <a class="link" href="diet.html"      data-page="diet">Diet</a>
+            <a class="link" href="profile.html"   data-page="profile">Profile</a>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <section id="no-data" style="display:none;">
+            <div class="error-card">
+                <h2>No Profile Found</h2>
+                <p>Please complete the onboarding to generate your plan.</p>
+                <a href="login.html" class="cta-btn">Go to Login</a>
+            </div>
+        </section>
+
+        <main id="dashboard" style="display:none;">
+            <header class="dashboard-header">
+                <div class="content">
+                    <span class="welcome-label" id="dateLabel">MONDAY, 27 APRIL</span>
+                    <h1 class="welcome-heading" id="welcomeName">Welcome back!</h1>
+                    <p class="welcome-sub" id="welcomeSub">Your protocol is being calculated...</p>
+                </div>
+                <div class="chips-row" id="chipsRow"></div>
+            </header>
+
+            <section class="analytics-grid">
+                <div class="grid-2">
+                    <article class="cal-card" id="maintenanceCard">
+                        <span class="section-label">Maintenance</span>
+                        <div class="cal-display">
+                            <span class="cal-val" id="calMaintenance">0</span>
+                            <span class="cal-unit">kcal</span>
+                        </div>
+                        <div class="prog-track"><div class="prog-fill" style="width: 100%"></div></div>
+                    </article>
+
+                    <article class="glass-card-highlighted" id="targetCard">
+                        <span class="section-label">Your Target</span>
+                            <div class="cal-display">
+                                <span class="cal-val" id="calTarget">0</span>
+                                <span class="cal-unit">kcal</span>
+                            </div>
+                            <div id="diffBadge"></div> <div class="prog-track"><div class="prog-fill" id="targetBar"></div></div>
+                    </article>
+                </div>
+                <div class="macro-grid" id="miniStats"></div>
+            </section>
+
+            <section class="content-zone">
+                <h2 class="section-label">Current Protocol</h2>
+                <div class="glass-card-workout">
+                    <div class="workout-header">
+                        <div>
+                            <h3 class="plan-title" id="planTitle">Plan Name</h3>
+                            <p class="plan-sub" id="planSub">Focus area description...</p>
+                        </div>
+                        <span class="workout-badge" id="planBadge">GOAL</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="day-list" id="dayList"></div>
+                </div>
+            </section>
+            <footer class="page-footer">
+                <button class="cta-btn" onclick="window.print()">Print Protocol (PDF)</button>
+                <p class="bottom-text">Plan generates dynamically based on current bio-stats.</p>
+            </footer>
+        </main>
+    </div>
+
+</body>
+</html>
