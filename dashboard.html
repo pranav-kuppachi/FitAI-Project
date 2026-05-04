@@ -3,7 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #07090E;
+            font-family: 'Inter', sans-serif;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #22D3EE; /* Cyan Orb */
+            border-radius: 50%;
+            filter: blur(160px);
+            opacity: 0.12;
+            top: -50px;
+            left: -50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+    
+        body::after {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #3B82F6; 
+            border-radius: 50%;
+            filter: blur(160px);
+            opacity: 0.12;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+            pointer-events: none;
+        }
+    
+    </style>
 </head>
 <body>
     <nav class="pill-nav" id="pillNav">
