@@ -27,5 +27,34 @@
       }
     ],
     "dailyMetrics": []
+  },
+  {
+    "userId": "usr_1778439302454",
+    "streak": 0,
+    "history": [],
+    "sleepLogs": [
+      {
+        "hours": 0
+      }
+    ],
+    "waterLogs": [
+      {
+        "liters": 0.5
+      }
+    ],
+    "dailyMetrics": [
+      {
+        "type": "stress",
+        "value": "6"
+      },
+      {
+        "type": "stress",
+        "value": "7"
+      },
+      {
+        "type": "mood",
+        "value": "😐"
+      }
+    ]
   }
 ]

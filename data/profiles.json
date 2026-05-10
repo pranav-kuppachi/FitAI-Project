@@ -25,5 +25,14 @@
     "height": 170,
     "activity": "moderate",
     "goal": "lose"
+  },
+  {
+    "userId": "usr_1778439302454",
+    "name": "Danush",
+    "age": 18,
+    "weight": 87,
+    "height": 181,
+    "activity": "moderate",
+    "goal": "lose"
   }
 ]
