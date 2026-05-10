@@ -1,11 +1,8 @@
 {
-  "name": "fit-ai",
+  "name": "fitai-project",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "main.js", 
   "scripts": {
     "start": "electron ."
-  },
-  "devDependencies": {
-    "electron": "^latest"
   }
 }

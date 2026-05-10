@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron');
+
 async function initializeData() {
     try {
         if (!localStorage.getItem('fitai_auth')) {
@@ -45,6 +47,7 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
 
+    // 1. SHARED VALIDATION
     if (!email.includes('@') || !email.includes('.') || email.length < 5) {
         alert("⚠️ Enter a valid email (e.g., name@gmail.com)");
         return;
@@ -55,7 +58,6 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
         return;
     }
 
-    // Load from your new partitioned storage
     let authDb = JSON.parse(localStorage.getItem('fitai_auth')) || [];
     let profilesDb = JSON.parse(localStorage.getItem('fitai_profiles')) || [];
     let activityDb = JSON.parse(localStorage.getItem('fitai_activity')) || [];
@@ -83,25 +85,37 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
             return;
         }
 
-        // Generate ID to link the 3 data types
+        // GENERATE UNIQUE ID
         const userId = "usr_" + Date.now();
 
-        // 1. Save to Auth
-        authDb.push({ userId, email, password });
+        // PREPARE DATA PACKAGE
+        const payload = {
+            auth: { userId, email, password },
+            profile: { userId, name, age, weight, height, activity, goal },
+            activity: { userId, streak: 0, history: [] }
+        };
+
+        // SYNC TO LOCAL STORAGE
+        authDb.push(payload.auth);
+        profilesDb.push(payload.profile);
+        activityDb.push(payload.activity);
+
         localStorage.setItem('fitai_auth', JSON.stringify(authDb));
-
-        // 2. Save to Profile
-        profilesDb.push({ userId, name, age, weight, height, activity, goal });
         localStorage.setItem('fitai_profiles', JSON.stringify(profilesDb));
-
-        // 3. Save to Activity
-        activityDb.push({ userId, streak: 0, history: [] });
         localStorage.setItem('fitai_activity', JSON.stringify(activityDb));
 
-        localStorage.setItem('currentUserId', userId);
-        alert("🔥 Account Created. Initializing your journey...");
-        window.location.href = 'profile.html';
+        // SEND TO ELECTRON MAIN PROCESS
+        ipcRenderer.send('signup-user', payload);
+
+        // HANDLE RESPONSE
+        ipcRenderer.on('signup-success', (event, result) => {
+            localStorage.setItem('currentUserId', result.userId);
+            alert("🔥 Account Created and Data Synced!");
+            window.location.href = 'profile.html';
+        });
+
     } else {
+        // LOGIN CHECK
         const user = authDb.find(u => u.email === email && u.password === password);
         if (user) {
             localStorage.setItem('currentUserId', user.userId);
