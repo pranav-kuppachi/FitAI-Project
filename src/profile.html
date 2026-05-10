@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitAI - Profile</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="bg-glow top-right"></div>
+    <div class="bg-glow bottom-left"></div>
+
+    <nav class="nav">
+        <div class="nav-logo">Fit<span>AI</span></div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="workout.html">Workouts</a>
+            <a href="diet.html">Diet</a>
+            <a href="profile.html" class="active">Profile</a>
+        </div>
+        <div class="nav-right">
+            <div class="user-avatar-circle" id="userInitial">A</div>
+            <a href="javascript:void(0)" onclick="handleLogout()" class="logout-link">LOGOUT</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="hero-section">
+            <h1 class="welcome-text">Hello, <span id="userName">Name</span></h1>
+            <p class="hero-subtitle gradient-text">VIEW YOUR STATS</p>
+        </div>
+
+        <div class="metrics-row">
+            <div class="glass-box">
+                <p class="label">📊 TOTAL LOGS</p>
+                <div class="val" id="totalCount">0</div>
+                <p class="sub-label">COMPLETED TO DATE</p>
+            </div>
+            <div class="glass-box">
+                <p class="label">⚡ WEEKLY LOGS</p>
+                <div class="val" id="weekCount">0</div>
+                <p class="sub-label">LOGS THIS WEEK</p>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <p class="label" style="text-align: center;">TARGET OBJECTIVE <span id="goalPercentage" style="color:#22D3EE">0%</span></p>
+            <div class="progress-wrapper">
+                <div class="progress-fill" id="goalProgressFill"></div>
+            </div>
+            <div class="progress-labels">
+                <div class="weight-info">
+                    <p class="label">STARTING</p>
+                    <p class="val-small" id="startWeight">84 KG</p>
+                </div>
+                <div class="weight-info">
+                    <p class="label">OBJECTIVE</p>
+                    <p class="val-small" id="targetWeight">79 KG</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card streak-card">
+            <p class="label gradient-text" style="text-align: center; margin-bottom: 20px; font-size: 12px;" id="streakDisplay">0 DAY STREAK</p>
+            <div class="calendar-wrapper" id="calendarWrapper"></div>
+        </div>
+
+        <div class="metrics-row">
+            <div class="glass-box">
+                <p class="label">EST. BMI INDEX</p>
+                <div class="val-small cyan-pop" id="bmiVal">0.0</div>
+            </div>
+            <div class="glass-box">
+                <p class="label">DAILY BMR</p>
+                <div class="val-small cyan-pop" id="bmrVal">0 KCAL</div>
+            </div>
+        </div>
+
+        <button class="execute-btn" onclick="logWorkout()">EXECUTE DAILY LOG</button>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>

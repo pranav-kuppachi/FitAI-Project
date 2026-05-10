@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitAI - LogIn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <p class="first-p">Fit<span class="cyan-text">AI</span> • Your Fitness Partner</p>
+            
+            <h1 class="subtitle" id="authTitle">Create Account</h1>
+            <p class="second-p" id="authSubtitle">Set your profile up to begin tracking.</p>
+        </div>
+
+        <form id="authForm">
+            <div id="signupFields">
+                <div class="row">
+                    <div class="input-group">
+                        <label>Name</label>
+                        <input class="text" type="text" id="name" placeholder="Your name">
+                    </div>
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input class="text" type="number" id="age" placeholder="e.g. 19">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Weight (KG)</label>
+                        <input class="text" type="number" id="weight" placeholder="70">
+                    </div>
+                    <div class="input-group">
+                        <label>Height (CM)</label>
+                        <input class="text" type="number" id="height" placeholder="170">
+                    </div>
+                </div>
+
+                <p class="section-title">Activity Level</p>
+                <div class="options-grid">
+                    <label class="option-card"><input class="radio" type="radio" name="activity" value="light"><span>Light</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="activity" value="moderate"><span>Moderate</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="activity" value="active"><span>Active</span></label>
+                </div>
+
+                <p class="section-title">Primary Goal</p>
+                <div class="options-grid-2">
+                    <label class="option-card"><input class="radio" type="radio" name="goal" value="lose"><span>🔥 Lose Weight</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="goal" value="muscle"><span>💪 Build Muscle</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="goal" value="feel_better"><span>🧘 Feel Better</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="goal" value="performance"><span>🏅 Performance</span></label>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input class="text" type="email" id="email" placeholder="name@gmail.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input class="text" type="password" id="password" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button class="submit" type="submit" id="submitBtn">Start Journey →</button>
+
+            <div class="auth-footer" style="text-align: center; margin-top: 25px;">
+                <span id="toggleText">ALREADY HAVE AN ACC?</span> 
+                <a href="javascript:void(0)" id="toggleAuth" onclick="toggleAuth()" style="color: #22D3EE; font-weight: 800; text-decoration: none; margin-left: 5px;">LOGIN</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
