@@ -21,7 +21,7 @@ async function initDashboard() {
         const data = await ipcRenderer.invoke('get-user-data', currentId);
         userProfile = data.userProfile;
 
-        // --- DYNAMIC AVATAR & GREETING ---
+        // DYNAMIC AVATAR & GREETING
         const firstName = userProfile?.name || "User";
         const initial = firstName.charAt(0).toUpperCase();
         
@@ -155,7 +155,7 @@ function renderCharts() {
         }
     };
 
-    // --- SLEEP LINE CHART ---
+    // SLEEP LINE CHART 
     sleepChartInstance = new Chart(sleepCtx, {
         type: 'line',
         data: {
@@ -172,7 +172,7 @@ function renderCharts() {
         options: commonOptions
     });
 
-    // --- WATER BAR CHART ---
+    // WATER BAR CHART
     waterChartInstance = new Chart(waterCtx, {
         type: 'bar',
         data: {
