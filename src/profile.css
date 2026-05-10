@@ -275,7 +275,6 @@ box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
 }
 
 .execute-btn:hover {
-background: #FFFFFF;
 transform: translateY(-3px);
 box-shadow: 0 15px 40px rgba(34, 211, 238, 0.5);
 }
