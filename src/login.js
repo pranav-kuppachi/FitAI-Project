@@ -111,7 +111,7 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
         ipcRenderer.on('signup-success', (event, result) => {
             localStorage.setItem('currentUserId', result.userId);
             alert("🔥 Account Created and Data Synced!");
-            window.location.href = 'profile.html';
+            window.location.href ='dashboard.html';
         });
 
     } else {
@@ -119,7 +119,7 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
         const user = authDb.find(u => u.email === email && u.password === password);
         if (user) {
             localStorage.setItem('currentUserId', user.userId);
-            window.location.href = 'profile.html';
+            window.location.href = 'dashboard.html';
         } else {
             alert("❌ Authentication Failed: Invalid credentials.");
         }

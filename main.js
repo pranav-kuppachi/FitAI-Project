@@ -16,15 +16,14 @@ function createWindow() {
     win.loadFile('src/login.html');
 }
 
-//  HELPER FUNCTIONS FOR FILE I/O
+// --- HELPER FUNCTIONS ---
 const getDataPath = (file) => path.join(__dirname, 'data', file);
 
-// Safe read function to prevent "Unexpected end of JSON" errors
 const safeRead = (fileName) => {
     try {
         const filePath = getDataPath(fileName);
         if (!fs.existsSync(filePath)) {
-            fs.writeFileSync(filePath, '[]'); // Create file if it doesn't exist
+            fs.writeFileSync(filePath, '[]'); 
             return [];
         }
         const content = fs.readFileSync(filePath, 'utf8').trim();
@@ -39,13 +38,12 @@ const safeWrite = (fileName, data) => {
     fs.writeFileSync(getDataPath(fileName), JSON.stringify(data, null, 2));
 };
 
-// DATA PERSISTENCE HANDLERS 
+// --- IPC HANDLERS ---
 
-// Handle Signup
+// 1. INITIAL SIGNUP (Creates the 3 records)
 ipcMain.on('signup-user', (event, payload) => {
     try {
         const { auth, profile, activity } = payload;
-
         const authDb = safeRead('auth.json');
         const profDb = safeRead('profiles.json');
         const actDb = safeRead('activity.json');
@@ -58,14 +56,54 @@ ipcMain.on('signup-user', (event, payload) => {
         safeWrite('profiles.json', profDb);
         safeWrite('activity.json', actDb);
 
-        // Success! Send word back to the renderer (login.js)
         event.reply('signup-success', { userId: auth.userId });
     } catch (err) {
         console.error("Signup Protocol Failed:", err);
     }
 });
 
-// APP LIFECYCLE 
+// 2. DATA RETRIEVAL (For Dashboard Load)
+ipcMain.handle('get-user-data', (event, userId) => {
+    const profiles = safeRead('profiles.json');
+    const activity = safeRead('activity.json');
+    
+    return { 
+        userProfile: profiles.find(p => p.userId === userId), 
+        userActivity: activity.find(a => a.userId === userId) 
+    };
+});
+
+// 3. ACTIVITY UPDATER (Handles Sleep, Water, Mood, Stress)
+ipcMain.on('update-activity', (event, payload) => {
+    try {
+        const { userId, type, value, date } = payload;
+        const actDb = safeRead('activity.json');
+        const userIdx = actDb.findIndex(a => a.userId === userId);
+
+        if (userIdx !== -1) {
+            // Ensure sub-arrays exist
+            if (!actDb[userIdx].sleepLogs) actDb[userIdx].sleepLogs = [];
+            if (!actDb[userIdx].waterLogs) actDb[userIdx].waterLogs = [];
+            if (!actDb[userIdx].dailyMetrics) actDb[userIdx].dailyMetrics = [];
+
+            // Route data to correct log
+            if (type === 'sleep') {
+                actDb[userIdx].sleepLogs.push({ date, hours: value });
+            } else if (type === 'water') {
+                // Update today's water if it exists, otherwise push new
+                const waterDay = actDb[userIdx].waterLogs.find(w => w.date === date);
+                if (waterDay) waterDay.liters = value;
+                else actDb[userIdx].waterLogs.push({ date, liters: value });
+            } else if (type === 'mood' || type === 'stress') {
+                actDb[userIdx].dailyMetrics.push({ date, type, value });
+            }
+
+            safeWrite('activity.json', actDb);
+        }
+    } catch (err) {
+        console.error("Activity Sync Failed:", err);
+    }
+});
 
 app.whenReady().then(createWindow);
 

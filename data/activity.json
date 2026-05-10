@@ -3,5 +3,29 @@
     "userId": "usr_1778411348450",
     "streak": 0,
     "history": []
+  },
+  {
+    "userId": "usr_1778427898012",
+    "streak": 0,
+    "history": []
+  },
+  {
+    "userId": "usr_1778429866226",
+    "streak": 0,
+    "history": [],
+    "sleepLogs": [
+      {
+        "hours": "0.0"
+      },
+      {
+        "hours": 0
+      }
+    ],
+    "waterLogs": [
+      {
+        "liters": 2
+      }
+    ],
+    "dailyMetrics": []
   }
 ]

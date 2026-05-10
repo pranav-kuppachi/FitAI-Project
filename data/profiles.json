@@ -7,5 +7,23 @@
     "height": 180,
     "activity": "light",
     "goal": "lose"
+  },
+  {
+    "userId": "usr_1778427898012",
+    "name": "Hrishabh",
+    "age": 19,
+    "weight": 56,
+    "height": 123,
+    "activity": "light",
+    "goal": "muscle"
+  },
+  {
+    "userId": "usr_1778429866226",
+    "name": "Hrishabh",
+    "age": 19,
+    "weight": 70,
+    "height": 170,
+    "activity": "moderate",
+    "goal": "lose"
   }
 ]

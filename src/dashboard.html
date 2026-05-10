@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitAI • Dashboard</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.js"></script>
+    <script src = "workout.js"></script>
+</head>
+<body class="dashboard-page">
+
+    <div class="bg-glow top-right"></div>
+    <div class="bg-glow bottom-left"></div>
+
+    <nav class="nav">
+        <div class="nav-logo" onclick="location.reload()">Fit<span>AI</span></div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="active">DASHBOARD</a>
+            <a href="workout.html">WORKOUTS</a>
+            <a href="diet.html">DIET</a>
+            <a href="profile.html">PROFILE</a>
+        </div>
+        <div class="nav-right">
+            <div class="user-avatar-circle">P</div>
+            <a href="#" class="logout-link" onclick="logout()">LOGOUT</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        
+        <header class="hero-section">
+            <p id="bioTip" class="hero-subtitle">YOUR DAILY SUMMARY</p>
+            <h1 id="greetingText" class="welcome-text">Loading...</h1>
+        </header>
+
+        <div class="top-row-grid">
+            <section class="glass-box workout-box">
+                <div class="label">TODAY'S WORKOUT</div>
+                <h2 id="workoutName" class="val-small">Rest Day</h2>
+                <ul id="exerciseList" class="dashboard-list"></ul>
+                <div id="strategyBadge" class="strategy-badge">RECOVERY PHASE</div>
+            </section>
+
+            <section class="glass-box schedule-box">
+                <div class="label">WEEKLY PROGRESS</div>
+                <div class="schedule-grid" id="weeklySchedule">
+                    <div class="day-check" data-day="Mon"><span>MON</span><div class="checkbox"></div></div>
+                    <div class="day-check" data-day="Tue"><span>TUE</span><div class="checkbox"></div></div>
+                    <div class="day-check" data-day="Wed"><span>WED</span><div class="checkbox"></div></div>
+                    <div class="day-check" data-day="Thu"><span>THU</span><div class="checkbox"></div></div>
+                    <div class="day-check" data-day="Fri"><span>FRI</span><div class="checkbox"></div></div>
+                    <div class="day-check" data-day="Sat"><span>SAT</span><div class="checkbox"></div></div>
+                    <div class="day-check" data-day="Sun"><span>SUN</span><div class="checkbox"></div></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="metrics-grid">
+            <section class="glass-box">
+                <div class="label">NEURAL RECOVERY</div>
+                <div class="tracker-main">
+                    <div class="val-container">
+                        <span id="sleepDisplay" class="val">0.0</span><small class="unit">HRS</small>
+                    </div>
+                    <div id="sleepTimer" class="timer-display">00:00:00</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="sleepChart"></canvas>
+                </div>
+                <button id="sleepBtn" class="execute-btn" onclick="toggleSleepSession()">START SESSION</button>
+            </section>
+
+            <section class="glass-box">
+                <div class="label">SYSTEM HYDRATION</div>
+                <div class="tracker-main">
+                    <div class="val-container">
+                        <span id="waterVal" class="val">0.0</span><small class="unit">/ 3.0L</small>
+                    </div>
+                    <div id="waterStatus" class="sub-label">0% OF DAILY GOAL</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="waterChart"></canvas>
+                </div>
+                <button id="waterBtn" class="execute-btn" onclick="logWater()">+ 250ML</button>
+            </section>
+        </div>
+
+        <div class="footer-grid">
+            <section class="glass-box mood-box">
+                <div class="label">CURRENT MOOD</div>
+                <div class="mood-selector">
+                    <button class="mood-btn" data-mood="⚡" onclick="selectMood(this)">⚡</button>
+                    <button class="mood-btn" data-mood="😄" onclick="selectMood(this)">😄</button>
+                    <button class="mood-btn" data-mood="🙂" onclick="selectMood(this)">🙂</button>
+                    <button class="mood-btn" data-mood="😐" onclick="selectMood(this)">😐</button>
+                    <button class="mood-btn" data-mood="😴" onclick="selectMood(this)">😴</button>
+                </div>
+            </section>
+
+            <section class="glass-box stress-box">
+                <div class="label-row">
+                    <span class="label">STRESS LOAD</span>
+                    <span id="stressLabel" class="val-small">5</span>
+                </div>
+                <input type="range" id="stressSlider" min="1" max="10" value="5" class="protocol-slider" oninput="updateStressUI(this.value)">
+            </section>
+        </div>
+    </main>
+
+</body>
+</html>
