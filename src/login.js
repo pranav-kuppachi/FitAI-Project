@@ -32,27 +32,43 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
 
+    //  SHARED VALIDATION (LOGIN & SIGNUP) 
+    if (!email.includes('@') || !email.includes('.') || email.length < 5) {
+        alert("⚠️ Enter a valid email (e.g., name@gmail.com)");
+        return;
+    }   
+
+    if (password.length < 8) {
+        alert("⚠️ Password must be at least 8 characters long.");
+        return;
+    }
+
     // Get existing users from storage
     let users = JSON.parse(localStorage.getItem('fitai_users')) || [];
 
     if (isSignUp) {
         // CAPTURE ALL DATA
-        const name = document.getElementById('name').value;
-        const age = document.getElementById('age').value;
-        const weight = document.getElementById('weight').value;
-        const height = document.getElementById('height').value;
+        const name = document.getElementById('name').value.trim();
+        const age = parseInt(document.getElementById('age').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
         const activity = document.querySelector('input[name="activity"]:checked')?.value;
         const goal = document.querySelector('input[name="goal"]:checked')?.value;
 
-        // Validation
-        if (!name || !weight || !height || !activity || !goal) {
-            alert("⚠️ Please complete your biometric profile.");
+        //2. SIGNUP SPECIFIC VALIDATION
+        if (!name || !age || !weight || !height || !activity || !goal) {
+            alert("⚠️ Biometric data incomplete. Please fill all fields.");
+            return;
+        }
+
+        if (age <= 0 || weight <= 0 || height <= 0) {
+            alert("⚠️ Invalid Metrics: Age, Weight, and Height must be positive numbers.");
             return;
         }
 
         // Check for duplicates
         if (users.find(u => u.email === email)) {
-            alert("❌ User already exists. Try logging in.");
+            alert("❌ Identity Conflict: User already exists. Try logging in.");
             return;
         }
 
@@ -66,8 +82,9 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
         // SAVE DATA
         users.push(newUser);
         localStorage.setItem('fitai_users', JSON.stringify(users));
-        localStorage.setItem('currentUser', email); // Set active user
+        localStorage.setItem('currentUser', email);
         
+        alert("🔥 Account Created. Initializing your journey...");
         window.location.href = 'profile.html';
     } else {
         // LOGIN CHECK
@@ -76,7 +93,7 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
             localStorage.setItem('currentUser', email);
             window.location.href = 'profile.html';
         } else {
-            alert("❌ Invalid credentials.");
+            alert("❌ Authentication Failed: Invalid credentials.");
         }
     }
 });
