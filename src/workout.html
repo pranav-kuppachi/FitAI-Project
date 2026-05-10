@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="workout.css">
+    <script src="workout.js" defer></script>
+</head>
+<body>
+    <!-- Background Glows -->
+    <div class="bg-glow top-right"></div>
+    <div class="bg-glow bottom-left"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">Fit<span>AI</span></div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="workout.html" class="active">Workouts</a>
+            <a href="diet.html">Diet</a>
+            <a href="profile.html">Profile</a>
+        </div>
+        <div class="nav-right">
+            <div class="user-avatar-circle">U</div>
+            <a href="login.html" class="logout-link">LOGOUT</a>
+        </div>
+    </nav>
+
+    <div class="container workout-container">
+        <!-- Header Section -->
+        <header class="workout-header glass-box">
+            <h1 id="workout-day-title">LOADING...</h1>
+            <div class="session-timer-box">
+                <span class="timer-label">ACTIVE SESSION</span>
+                <span id="session-timer" class="neon-text">00:00</span>
+            </div>
+        </header>
+
+        <!-- Goal Card -->
+        <div class="goal-card glass-box">
+            <span class="goal-icon">🎯</span>
+            <span id="user-goal-text">Goal: Loading...</span>
+        </div>
+
+        <!-- Split List Section -->
+        <section class="split-list-section">
+            <h2>Today's Protocol</h2>
+            <div id="exercise-list" class="exercise-grid">
+                <!-- Dynamically populated by JS -->
+            </div>
+        </section>
+
+        <!-- Floating Rest Timer SVG -->
+        <div id="rest-timer-container" class="hidden">
+            <svg class="rest-ring" width="120" height="120">
+                <circle class="rest-ring__track" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                <!-- 2 * PI * 50 = 314 -->
+                <circle id="rest-ring__circle" class="rest-ring__circle" stroke="#22D3EE" stroke-width="8" fill="transparent" r="50" cx="60" cy="60" stroke-dasharray="314" stroke-dashoffset="0" stroke-linecap="round"/>
+            </svg>
+            <div class="rest-timer-text">
+                <span id="rest-countdown">60</span>
+                <span class="rest-label">REST</span>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

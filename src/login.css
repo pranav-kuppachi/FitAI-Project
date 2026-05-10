@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
+/* --- GLOBAL STYLES --- */
 body {
     background-color: #030712;
     font-family: 'Inter', sans-serif;
     color: #FFFFFF;
     min-height: 100vh;
-    display: flex;
+    display: flex; /* Flexbox is used to center the card */
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    position: relative;
+    position: relative; /* Allows absolute positioning for the background glowing orbs */
 }
 
+/* Background glowing cyan orb (Top Left) */
 body::before {
     content: "";
     position: absolute;
@@ -23,6 +25,7 @@ body::before {
     z-index: 0;
 }
 
+/* Background glowing blue orb (Bottom Right) */
 body::after {
     content: "";
     position: absolute;
@@ -34,10 +37,11 @@ body::after {
     z-index: 0;
 }
 
+/* --- MAIN CARD STYLING (GLASSMORPHISM) --- */
 .card {
     position: relative;
     background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(40px) saturate(200%);
+    backdrop-filter: blur(40px) saturate(200%); /* Creates frosted glass effect */
     -webkit-backdrop-filter: blur(40px) saturate(200%);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -46,23 +50,22 @@ body::after {
     padding: 40px 50px;
     width: 90%;
     max-width: 560px;
-    z-index: 1;
+    z-index: 1; /* Keeps card above background orbs */
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
+/* Subtle cyan gradient overlay specifically inside the top-left of the card */
 .card::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     border-radius: 32px;
     background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.05), transparent 40%);
-    pointer-events: none;
+    pointer-events: none; /* Prevents this layer from blocking mouse clicks */
     z-index: -1;
 }
 
+/* --- HEADER TEXT STYLING --- */
 .header {
     margin-bottom: 25px;
 }
@@ -75,6 +78,7 @@ body::after {
     text-transform: uppercase;
 }
 
+/* Highlights 'AI' in cyan */
 .first-p span.cyan-text {
     color: #22D3EE;
     font-weight: 900;
@@ -94,6 +98,7 @@ body::after {
     margin-top: 4px;
 }
 
+/* --- FORM LAYOUT AND INPUTS --- */
 .row {
     display: flex;
     gap: 16px;
@@ -126,6 +131,7 @@ label {
     transition: all 0.3s ease;
 }
 
+/* Glow effect when the user clicks inside the input box to type */
 .text:focus {
     border-color: #22D3EE;
     background: rgba(255, 255, 255, 0.06);
@@ -142,6 +148,7 @@ label {
     letter-spacing: 1px;
 }
 
+/* --- CUSTOM RADIO BUTTON CARDS --- */
 .options-grid, .options-grid-2 {
     display: grid;
     gap: 10px;
@@ -155,6 +162,7 @@ label {
     grid-template-columns: repeat(2, 1fr);
 }
 
+/* The visual 'card' that replaces the default radio button */
 .option-card {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -174,6 +182,7 @@ label {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
+/* MAGIC TRICK: How the card looks when the hidden radio button inside it is checked */
 .option-card:has(input:checked) {
     background: rgba(34, 211, 238, 0.15);
     border-color: #22D3EE;
@@ -181,10 +190,12 @@ label {
     box-shadow: 0 0 20px rgba(34, 211, 238, 0.1);
 }
 
+/* Hides the default circle radio buttons entirely */
 .radio {
     display: none;
 }
 
+/* --- SUBMIT BUTTON --- */
 .submit {
     width: 100%;
     margin-top: 35px;
@@ -201,12 +212,14 @@ label {
     transition: all 0.3s ease;
 }
 
+/* Animate the button to move up slightly and glow when hovered */
 .submit:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 25px rgba(34, 211, 238, 0.3);
     filter: brightness(1.1);
 }
 
+/* --- BOTTOM TOGGLE LINK --- */
 .auth-footer {
     text-align: center;
     margin-top: 25px;

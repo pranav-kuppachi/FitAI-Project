@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Protocol | FitAI</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="diet.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="diet.js"></script>
+</head>
+<body>
+    <!-- Background Glows from common.css -->
+    <div class="bg-glow top-right"></div>
+    <div class="bg-glow bottom-left"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">Fit<span>AI</span></div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="workout.html">Workouts</a>
+            <a href="diet.html" class="active">Diet </a>
+            <a href="profile.html">Profile</a>
+        </div>
+        <div class="nav-right">
+            <div class="user-avatar-circle">P</div>
+            <a href="login.html" class="logout-link">LOGOUT</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Quote Section -->
+        <div class="quote-section">
+            <h1>"Muscles are built in the gym, <span>revealed in the kitchen</span>."</h1>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="glass-box hero-left">
+                <h2>Total Calories</h2>
+                <div class="svg-container">
+                    <svg class="progress-ring" width="200" height="200">
+                        <circle class="progress-ring__track" stroke="rgba(255,255,255,0.05)" stroke-width="15" fill="transparent" r="85" cx="100" cy="100"/>
+                        <!-- 2 * PI * 85 = 534.07 -->
+                        <circle class="progress-ring__circle" stroke="#22D3EE" stroke-width="15" fill="transparent" r="85" cx="100" cy="100" stroke-dasharray="534" stroke-dashoffset="150" stroke-linecap="round"/>
+                    </svg>
+                    <div class="calories-val">
+                        <span class="val">1850</span>
+                        <span class="lbl">/ 2500 kcal</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-box hero-right">
+                <h2>Weekly Calorie Trends</h2>
+                <div class="chart-container">
+                    <canvas id="calorieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area glass-box">
+            <input type="text" id="meal-input" placeholder="e.g. 2 eggs, 1 slice of toast, and a glass of milk" class="glass-input">
+            <button class="neon-btn" id="analyze-btn">Analyze Meal</button>
+        </div>
+
+        <!-- Macro Row -->
+        <div class="macro-row">
+            <div class="glass-box macro-card">
+                <h3>Protein</h3>
+                <div class="macro-svg-container">
+                    <svg class="macro-ring" width="100" height="100">
+                        <circle class="macro-ring__track" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent" r="40" cx="50" cy="50"/>
+                        <!-- 2 * PI * 40 = 251.32 -->
+                        <circle class="macro-ring__circle protein-ring" stroke="#FF4B4B" stroke-width="8" fill="transparent" r="40" cx="50" cy="50" stroke-dasharray="251" stroke-dashoffset="75" stroke-linecap="round"/>
+                    </svg>
+                    <div class="macro-val">
+                        <span class="m-val">120g</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-box macro-card">
+                <h3>Carbs</h3>
+                <div class="macro-svg-container">
+                    <svg class="macro-ring" width="100" height="100">
+                        <circle class="macro-ring__track" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent" r="40" cx="50" cy="50"/>
+                        <circle class="macro-ring__circle carbs-ring" stroke="#FBBF24" stroke-width="8" fill="transparent" r="40" cx="50" cy="50" stroke-dasharray="251" stroke-dashoffset="100" stroke-linecap="round"/>
+                    </svg>
+                    <div class="macro-val">
+                        <span class="m-val">180g</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-box macro-card">
+                <h3>Fats</h3>
+                <div class="macro-svg-container">
+                    <svg class="macro-ring" width="100" height="100">
+                        <circle class="macro-ring__track" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent" r="40" cx="50" cy="50"/>
+                        <circle class="macro-ring__circle fats-ring" stroke="#34D399" stroke-width="8" fill="transparent" r="40" cx="50" cy="50" stroke-dasharray="251" stroke-dashoffset="180" stroke-linecap="round"/>
+                    </svg>
+                    <div class="macro-val">
+                        <span class="m-val">45g</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recipe Section -->
+        <div class="recipe-section">
+            <div class="section-header">
+                <h2>Recipe Generation</h2>
+                <div class="recipe-input-wrapper">
+                    <input type="text" class="glass-input recipe-search" placeholder="Enter ingredients (e.g. chicken, rice, broccoli)...">
+                    <button class="neon-btn small-neon">Generate</button>
+                </div>
+            </div>
+            
+            <div class="recipe-grid">
+                <!-- Recipe Card 1 -->
+                <div class="glass-box recipe-card">
+                    <div class="recipe-img placeholder-img1"></div>
+                    <div class="recipe-info">
+                        <h4>Spicy Grilled Chicken Bowl</h4>
+                        <div class="recipe-meta">
+                            <span>450 kcal</span>
+                            <span>40g P</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recipe Card 2 -->
+                <div class="glass-box recipe-card">
+                    <div class="recipe-img placeholder-img2"></div>
+                    <div class="recipe-info">
+                        <h4>Avocado Toast with Poached Eggs</h4>
+                        <div class="recipe-meta">
+                            <span>320 kcal</span>
+                            <span>15g P</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recipe Card 3 -->
+                <div class="glass-box recipe-card">
+                    <div class="recipe-img placeholder-img3"></div>
+                    <div class="recipe-info">
+                        <h4>Beef & Broccoli Stir Fry</h4>
+                        <div class="recipe-meta">
+                            <span>520 kcal</span>
+                            <span>35g P</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

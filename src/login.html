@@ -1,82 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitAI - LogIn</title>
+    <!-- Metadata section: Information about the page, not visible to users -->
+    <meta charset="UTF-8"> <!-- Allows special characters and emojis to display correctly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures the page scales correctly on mobile devices -->
+    <title>FitAI - LogIn</title> <!-- The text shown in the browser tab -->
+    
+    <!-- Import 'Inter' font from Google for modern typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Import external CSS files for styling -->
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
+    <!-- Main container for the glassmorphism card -->
     <div class="card">
+        <!-- Header section containing titles and subtitles -->
         <div class="header">
+            <!-- Main branding text with 'AI' highlighted in cyan using a span -->
             <p class="first-p">Fit<span class="cyan-text">AI</span> • Your Fitness Partner</p>
-            
+
+            <!-- Dynamic title changed by JavaScript depending on Login/Signup mode -->
             <h1 class="subtitle" id="authTitle">Create Account</h1>
             <p class="second-p" id="authSubtitle">Set your profile up to begin tracking.</p>
         </div>
 
+        <!-- The main form that collects user input -->
         <form id="authForm">
+            <!-- This section is hidden during Login, visible during Signup -->
             <div id="signupFields">
+                
+                <!-- Grouping Name and Age side-by-side using a Flexbox row -->
                 <div class="row">
                     <div class="input-group">
-                        <label>Name</label>
-                        <input class="text" type="text" id="name" placeholder="Your name">
+                        <label>Name</label> <!-- Text above the input box describing it -->
+                        <input class="text" type="text" id="name" placeholder="Your name"> <!-- Text input box -->
                     </div>
                     <div class="input-group">
                         <label>Age</label>
-                        <input class="text" type="number" id="age" min="7" placeholder="e.g. 19">
+                        <input class="text" type="number" id="age" placeholder="e.g. 19" min="16"> <!-- Number input box -->
                     </div>
                 </div>
 
+                <!-- Grouping Weight and Height side-by-side -->
                 <div class="row">
                     <div class="input-group">
                         <label>Weight (KG)</label>
-                        <input class="text" type="number" id="weight" min="1" placeholder="70">
+                        <input class="text" type="number" id="weight" placeholder="70">
                     </div>
                     <div class="input-group">
                         <label>Height (CM)</label>
-                        <input class="text" type="number" id="height" min="1" placeholder="170">
+                        <input class="text" type="number" id="height" placeholder="170">
                     </div>
                 </div>
 
+                <!-- Custom styled radio buttons for selecting ONE activity level -->
                 <p class="section-title">Activity Level</p>
                 <div class="options-grid">
-                    <label class="option-card"><input class="radio" type="radio" name="activity" value="light"><span>Light</span></label>
-                    <label class="option-card"><input class="radio" type="radio" name="activity" value="moderate"><span>Moderate</span></label>
-                    <label class="option-card"><input class="radio" type="radio" name="activity" value="active"><span>Active</span></label>
+                    <!-- The actual radio input is hidden by CSS, the label is styled as a clickable card instead -->
+                    <label class="option-card"><input class="radio" type="radio" name="activity"
+                            value="light"><span>Light</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="activity"
+                            value="moderate"><span>Moderate</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="activity"
+                            value="active"><span>Active</span></label>
                 </div>
 
+                <!-- Custom styled radio buttons for selecting ONE primary goal -->
                 <p class="section-title">Primary Goal</p>
                 <div class="options-grid-2">
-                    <label class="option-card"><input class="radio" type="radio" name="goal" value="lose"><span>🔥 Lose Weight</span></label>
-                    <label class="option-card"><input class="radio" type="radio" name="goal" value="muscle"><span>💪 Build Muscle</span></label>
-                    <label class="option-card"><input class="radio" type="radio" name="goal" value="feel_better"><span>🧘 Feel Better</span></label>
-                    <label class="option-card"><input class="radio" type="radio" name="goal" value="performance"><span>🏅 Performance</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="goal" value="lose"><span>🔥 Lose
+                            Weight</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="goal" value="muscle"><span>💪
+                            Build Muscle</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="goal"
+                            value="feel_better"><span>🧘 Feel Better</span></label>
+                    <label class="option-card"><input class="radio" type="radio" name="goal"
+                            value="performance"><span>🏅 Performance</span></label>
                 </div>
             </div>
 
+            <!-- Email and Password fields are ALWAYS visible (for both login and signup) -->
             <div class="row" style="margin-top: 20px;">
                 <div class="input-group">
                     <label>Email Address</label>
-                    <input class="text" type="email" id="email" placeholder="name@gmail.com" required>
+                    <input class="text" type="email" id="email" placeholder="name@gmail.com" required> <!-- Must be filled out -->
                 </div>
                 <div class="input-group">
                     <label>Password</label>
-                    <input class="text" type="password" id="password" placeholder="••••••••" required>
+                    <input class="text" type="password" id="password" placeholder="••••••••" required> <!-- Hides typed characters -->
                 </div>
             </div>
 
+            <!-- The submit button that triggers the JavaScript form logic -->
             <button class="submit" type="submit" id="submitBtn">Start Journey →</button>
 
+            <!-- Footer section containing the toggle link to switch between login/signup -->
             <div class="auth-footer" style="text-align: center; margin-top: 25px;">
-                <span id="toggleText">ALREADY HAVE AN ACC?</span> 
-                <a href="javascript:void(0)" id="toggleAuth" onclick="toggleAuth()" style="color: #22D3EE; font-weight: 800; text-decoration: none; margin-left: 5px;">LOGIN</a>
+                <span id="toggleText">ALREADY HAVE AN ACC?</span>
+                <!-- Clicking this link runs the toggleAuth() function in JavaScript -->
+                <a href="javascript:void(0)" id="toggleAuth" onclick="toggleAuth()"
+                    style="color: #22D3EE; font-weight: 800; text-decoration: none; margin-left: 5px;">LOGIN</a>
             </div>
         </form>
     </div>
 
+    <!-- Links the JavaScript file to make the page interactive -->
     <script src="login.js"></script>
 </body>
+
 </html>

@@ -1,8 +1,11 @@
 {
   "name": "fitai-project",
   "version": "1.0.0",
-  "main": "main.js", 
+  "main": "main.js",
   "scripts": {
     "start": "electron ."
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }

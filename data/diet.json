@@ -1,0 +1,24 @@
+[
+  {
+    "userId": "usr_1778429866226",
+    "logs": {
+      "2026-05-10": {
+        "totals": {
+          "calories": 289,
+          "protein": 14,
+          "carbs": 2,
+          "fat": 25
+        },
+        "foods": [
+          {
+            "name": "Paneer",
+            "calories": 289,
+            "protein": 14,
+            "carbs": 2,
+            "fat": 25
+          }
+        ]
+      }
+    }
+  }
+]

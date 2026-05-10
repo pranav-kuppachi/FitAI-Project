@@ -19,10 +19,10 @@ async function initDashboard() {
 
     try {
         const data = await ipcRenderer.invoke('get-user-data', currentId);
-        userProfile = data.userProfile;
+        userProfile = data.userProfile || { name: "User", goal: "performance", activityLevel: "moderate" };
 
         // DYNAMIC AVATAR & GREETING
-        const firstName = userProfile?.name || "User";
+        const firstName = userProfile.name;
         const initial = firstName.charAt(0).toUpperCase();
         
         // Update the Avatar Circle

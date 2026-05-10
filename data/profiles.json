@@ -34,5 +34,14 @@
     "height": 181,
     "activity": "moderate",
     "goal": "lose"
+  },
+  {
+    "userId": "usr_1778441494264",
+    "name": "Aarush",
+    "age": 20,
+    "weight": 72,
+    "height": 182,
+    "activity": "moderate",
+    "goal": "performance"
   }
 ]

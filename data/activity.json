@@ -2,7 +2,14 @@
   {
     "userId": "usr_1778411348450",
     "streak": 0,
-    "history": []
+    "history": [],
+    "sleepLogs": [],
+    "waterLogs": [
+      {
+        "liters": 1
+      }
+    ],
+    "dailyMetrics": []
   },
   {
     "userId": "usr_1778427898012",
@@ -13,20 +20,17 @@
     "userId": "usr_1778429866226",
     "streak": 0,
     "history": [],
-    "sleepLogs": [
-      {
-        "hours": "0.0"
-      },
-      {
-        "hours": 0
+    "sleepLogs": {
+      "2026-05-10": 0
+    },
+    "waterLogs": {
+      "2026-05-10": 0.75
+    },
+    "dailyMetrics": {
+      "2026-05-10": {
+        "stress": "7"
       }
-    ],
-    "waterLogs": [
-      {
-        "liters": 2
-      }
-    ],
-    "dailyMetrics": []
+    }
   },
   {
     "userId": "usr_1778439302454",
@@ -54,6 +58,31 @@
       {
         "type": "mood",
         "value": "😐"
+      }
+    ]
+  },
+  {
+    "userId": "usr_1778441494264",
+    "streak": 0,
+    "history": [],
+    "sleepLogs": [],
+    "waterLogs": [],
+    "dailyMetrics": [
+      {
+        "type": "stress",
+        "value": "6"
+      },
+      {
+        "type": "stress",
+        "value": "7"
+      },
+      {
+        "type": "stress",
+        "value": "6"
+      },
+      {
+        "type": "stress",
+        "value": "5"
       }
     ]
   }
