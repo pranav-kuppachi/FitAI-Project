@@ -1,4 +1,18 @@
-// Function to handle the UI swap
+async function initializeData() {
+    try {
+        if (!localStorage.getItem('fitai_auth')) {
+            const authRes = await fetch('../data/auth.json');
+            localStorage.setItem('fitai_auth', JSON.stringify(await authRes.json()));
+            
+            const profRes = await fetch('../data/profiles.json');
+            localStorage.setItem('fitai_profiles', JSON.stringify(await profRes.json()));
+            
+            const actRes = await fetch('../data/activity.json');
+            localStorage.setItem('fitai_activity', JSON.stringify(await actRes.json()));
+        }
+    } catch (e) { console.warn("Seed data skip: Using local persistence."); }
+}
+
 function toggleAuth() {
     const signupFields = document.getElementById('signupFields');
     const authTitle = document.getElementById('authTitle');
@@ -24,7 +38,6 @@ function toggleAuth() {
     }
 }
 
-// Handle Form Submission
 document.getElementById('authForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -32,7 +45,6 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
 
-    //  SHARED VALIDATION (LOGIN & SIGNUP) 
     if (!email.includes('@') || !email.includes('.') || email.length < 5) {
         alert("⚠️ Enter a valid email (e.g., name@gmail.com)");
         return;
@@ -43,11 +55,12 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
         return;
     }
 
-    // Get existing users from storage
-    let users = JSON.parse(localStorage.getItem('fitai_users')) || [];
+    // Load from your new partitioned storage
+    let authDb = JSON.parse(localStorage.getItem('fitai_auth')) || [];
+    let profilesDb = JSON.parse(localStorage.getItem('fitai_profiles')) || [];
+    let activityDb = JSON.parse(localStorage.getItem('fitai_activity')) || [];
 
     if (isSignUp) {
-        // CAPTURE ALL DATA
         const name = document.getElementById('name').value.trim();
         const age = parseInt(document.getElementById('age').value);
         const weight = parseFloat(document.getElementById('weight').value);
@@ -55,7 +68,6 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
         const activity = document.querySelector('input[name="activity"]:checked')?.value;
         const goal = document.querySelector('input[name="goal"]:checked')?.value;
 
-        //2. SIGNUP SPECIFIC VALIDATION
         if (!name || !age || !weight || !height || !activity || !goal) {
             alert("⚠️ Biometric data incomplete. Please fill all fields.");
             return;
@@ -66,31 +78,33 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
             return;
         }
 
-        // Check for duplicates
-        if (users.find(u => u.email === email)) {
+        if (authDb.find(u => u.email === email)) {
             alert("❌ Identity Conflict: User already exists. Try logging in.");
             return;
         }
 
-        // Create User Object
-        const newUser = {
-            name, email, password, age, weight, height, activity, goal,
-            logs: [],
-            streak: 0
-        };
+        // Generate ID to link the 3 data types
+        const userId = "usr_" + Date.now();
 
-        // SAVE DATA
-        users.push(newUser);
-        localStorage.setItem('fitai_users', JSON.stringify(users));
-        localStorage.setItem('currentUser', email);
-        
+        // 1. Save to Auth
+        authDb.push({ userId, email, password });
+        localStorage.setItem('fitai_auth', JSON.stringify(authDb));
+
+        // 2. Save to Profile
+        profilesDb.push({ userId, name, age, weight, height, activity, goal });
+        localStorage.setItem('fitai_profiles', JSON.stringify(profilesDb));
+
+        // 3. Save to Activity
+        activityDb.push({ userId, streak: 0, history: [] });
+        localStorage.setItem('fitai_activity', JSON.stringify(activityDb));
+
+        localStorage.setItem('currentUserId', userId);
         alert("🔥 Account Created. Initializing your journey...");
         window.location.href = 'profile.html';
     } else {
-        // LOGIN CHECK
-        const user = users.find(u => u.email === email && u.password === password);
+        const user = authDb.find(u => u.email === email && u.password === password);
         if (user) {
-            localStorage.setItem('currentUser', email);
+            localStorage.setItem('currentUserId', user.userId);
             window.location.href = 'profile.html';
         } else {
             alert("❌ Authentication Failed: Invalid credentials.");
@@ -99,5 +113,6 @@ document.getElementById('authForm').addEventListener('submit', function(e) {
 });
 
 window.onload = function() {
+    initializeData();
     document.getElementById('signupFields').style.display = 'block';
 };
